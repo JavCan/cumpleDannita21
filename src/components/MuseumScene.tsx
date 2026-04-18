@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import * as THREE from 'three';
 import Artwork from './Artwork';
 import FlowerVase from './FlowerVase';
@@ -105,8 +105,6 @@ const songs = [
 ];
 
 const MuseumScene = ({ onCakeClick, hasStarted }: { onCakeClick?: () => void, hasStarted: boolean }) => {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
-
   return (
     <group>
       {/* Floor - Light Wood */}
@@ -180,8 +178,6 @@ const MuseumScene = ({ onCakeClick, hasStarted }: { onCakeClick?: () => void, ha
               artist={song.artist}
               imageUrl={song.imageUrl}
               audioUrl={song.audioUrl}
-              onNext={() => index < songs.length - 1 && setActiveIndex(index + 1)}
-              onPrev={() => index > 0 && setActiveIndex(index - 1)}
               hasStarted={hasStarted}
             />
             {/* Painting halo light */}

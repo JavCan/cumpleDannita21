@@ -6,8 +6,6 @@ interface SongCardProps {
   artist: string;
   imageUrl: string;
   audioUrl: string;
-  onNext?: () => void;
-  onPrev?: () => void;
 }
 
 function formatTime(sec: number): string {
@@ -17,7 +15,7 @@ function formatTime(sec: number): string {
   return `${m}:${s.toString().padStart(2, '0')}`;
 }
 
-const SongCard = ({ title, artist, imageUrl, audioUrl, onNext, onPrev }: SongCardProps) => {
+const SongCard = ({ title, artist, imageUrl, audioUrl }: SongCardProps) => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -32,7 +30,7 @@ const SongCard = ({ title, artist, imageUrl, audioUrl, onNext, onPrev }: SongCar
     if (!audio) return;
     const onTimeUpdate = () => setCurrentTime(audio.currentTime);
     const onLoaded = () => setDuration(audio.duration);
-    const onEnded = () => { setIsPlaying(false); onNext?.(); };
+    const onEnded = () => { setIsPlaying(false); };
     audio.addEventListener('timeupdate', onTimeUpdate);
     audio.addEventListener('loadedmetadata', onLoaded);
     audio.addEventListener('ended', onEnded);
@@ -41,7 +39,7 @@ const SongCard = ({ title, artist, imageUrl, audioUrl, onNext, onPrev }: SongCar
       audio.removeEventListener('loadedmetadata', onLoaded);
       audio.removeEventListener('ended', onEnded);
     };
-  }, [onNext]);
+  }, []);
 
   // If audioUrl changes, stop current playback
   useEffect(() => {

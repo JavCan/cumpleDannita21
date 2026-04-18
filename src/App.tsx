@@ -1,7 +1,6 @@
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, SoftShadows } from '@react-three/drei';
 import { useRef, useState, useEffect } from 'react';
-import * as THREE from 'three';
 import { X } from 'lucide-react';
 import MuseumScene from './components/MuseumScene';
 

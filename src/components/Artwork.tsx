@@ -8,12 +8,10 @@ interface ArtworkProps {
   artist: string;
   imageUrl: string;
   audioUrl: string;
-  onNext?: () => void;
-  onPrev?: () => void;
   hasStarted: boolean;
 }
 
-const Artwork = ({ position, title, artist, imageUrl, audioUrl, onNext, onPrev, hasStarted }: ArtworkProps) => {
+const Artwork = ({ position, title, artist, imageUrl, audioUrl, hasStarted }: ArtworkProps) => {
   return (
     <group position={position}>
       {/* Frame backboard */}
@@ -69,8 +67,6 @@ const Artwork = ({ position, title, artist, imageUrl, audioUrl, onNext, onPrev, 
             artist={artist}
             imageUrl={imageUrl}
             audioUrl={audioUrl}
-            onNext={onNext}
-            onPrev={onPrev}
           />
         </Html>
       )}
