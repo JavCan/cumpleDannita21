@@ -1,5 +1,4 @@
 import { useGLTF } from '@react-three/drei';
-import { useState } from 'react';
 import cakeGlb from '../models_3d/birthday_cake.glb?url';
 
 export default function BirthdayCake({ onCakeClick, ...props }: any) {
