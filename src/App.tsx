@@ -5,6 +5,8 @@ import * as THREE from 'three';
 import { X } from 'lucide-react';
 import MuseumScene from './components/MuseumScene';
 
+import felicitacion from './images/felicitacion.png';
+
 // Component for the initial welcome screen with black fade-out
 function IntroScreen({ onStart }: { onStart: () => void }) {
   const [isFading, setIsFading] = useState(false);
@@ -45,23 +47,9 @@ function BirthdayOverlay({ onClose }: { onClose: () => void }) {
         </button>
         <img 
           className="overlay-image"
-          src="https://images.unsplash.com/photo-1530103043960-ef38714abb15?auto=format&fit=crop&q=80&w=1200" 
+          src={felicitacion} 
           alt="Happy Birthday" 
         />
-        <div style={{
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          padding: '20px',
-          background: 'linear-gradient(transparent, rgba(0,0,0,0.8))',
-          color: 'white',
-          textAlign: 'center'
-        }}>
-          <h1 style={{ margin: 0, fontSize: '2.5rem', textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}>
-            ¡Feliz Cumpleaños! 🎂
-          </h1>
-        </div>
       </div>
     </div>
   );
