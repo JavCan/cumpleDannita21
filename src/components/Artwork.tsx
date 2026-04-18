@@ -10,9 +10,10 @@ interface ArtworkProps {
   audioUrl: string;
   onNext?: () => void;
   onPrev?: () => void;
+  hasStarted: boolean;
 }
 
-const Artwork = ({ position, title, artist, imageUrl, audioUrl, onNext, onPrev }: ArtworkProps) => {
+const Artwork = ({ position, title, artist, imageUrl, audioUrl, onNext, onPrev, hasStarted }: ArtworkProps) => {
   return (
     <group position={position}>
       {/* Frame backboard */}
@@ -55,22 +56,24 @@ const Artwork = ({ position, title, artist, imageUrl, audioUrl, onNext, onPrev }
         </mesh>
       </group>
 
-      {/* HTML music card */}
-      <Html
-        transform
-        occlude
-        distanceFactor={2.0}
-        position={[0, 0, 0.02]}
-      >
-        <SongCard
-          title={title}
-          artist={artist}
-          imageUrl={imageUrl}
-          audioUrl={audioUrl}
-          onNext={onNext}
-          onPrev={onPrev}
-        />
-      </Html>
+      {/* HTML music card - Only render after intro started to avoid visibility issues */}
+      {hasStarted && (
+        <Html
+          transform
+          occlude
+          distanceFactor={2.0}
+          position={[0, 0, 0.02]}
+        >
+          <SongCard
+            title={title}
+            artist={artist}
+            imageUrl={imageUrl}
+            audioUrl={audioUrl}
+            onNext={onNext}
+            onPrev={onPrev}
+          />
+        </Html>
+      )}
     </group>
   );
 };

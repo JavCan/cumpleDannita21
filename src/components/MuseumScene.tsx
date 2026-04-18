@@ -104,7 +104,7 @@ const songs = [
   }
 ];
 
-const MuseumScene = ({ onCakeClick }: { onCakeClick?: () => void }) => {
+const MuseumScene = ({ onCakeClick, hasStarted }: { onCakeClick?: () => void, hasStarted: boolean }) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   return (
@@ -180,8 +180,9 @@ const MuseumScene = ({ onCakeClick }: { onCakeClick?: () => void }) => {
               artist={song.artist}
               imageUrl={song.imageUrl}
               audioUrl={song.audioUrl}
-              onNext={() => setActiveIndex(Math.min(index + 1, songs.length - 1))}
-              onPrev={() => setActiveIndex(Math.max(index - 1, 0))}
+              onNext={() => index < songs.length - 1 && setActiveIndex(index + 1)}
+              onPrev={() => index > 0 && setActiveIndex(index - 1)}
+              hasStarted={hasStarted}
             />
             {/* Painting halo light */}
             <pointLight position={[xPos, 2, -2]} distance={4} intensity={8} color="#fff5e0" />

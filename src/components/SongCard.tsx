@@ -64,6 +64,13 @@ const SongCard = ({ title, artist, imageUrl, audioUrl, onNext, onPrev }: SongCar
     }
   };
 
+  const skipTime = (amount: number) => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    audio.currentTime = Math.max(0, Math.min(duration, audio.currentTime + amount));
+    setCurrentTime(audio.currentTime);
+  };
+
   const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
     const bar = progressRef.current;
     const audio = audioRef.current;
@@ -85,10 +92,13 @@ const SongCard = ({ title, artist, imageUrl, audioUrl, onNext, onPrev }: SongCar
   });
 
   return (
-    <div style={{
-      width: '320px',
-      height: '480px',
-      background: 'linear-gradient(135deg, rgba(30,30,30,0.95) 0%, rgba(10,10,10,0.98) 100%)',
+    <div 
+      className="card-fade-in"
+      style={{
+        width: '320px',
+        height: '480px',
+        background: 'linear-gradient(135deg, rgba(30,30,30,0.95) 0%, rgba(10,10,10,0.98) 100%)',
+
       backdropFilter: 'blur(16px)',
       borderRadius: '16px',
       padding: '16px',
@@ -177,7 +187,7 @@ const SongCard = ({ title, artist, imageUrl, audioUrl, onNext, onPrev }: SongCar
           style={btnStyle('prev', {})}
           onMouseEnter={() => setHoveredBtn('prev')}
           onMouseLeave={() => setHoveredBtn(null)}
-          onClick={onPrev}
+          onClick={() => skipTime(-5)}
         />
 
         <div
@@ -204,7 +214,7 @@ const SongCard = ({ title, artist, imageUrl, audioUrl, onNext, onPrev }: SongCar
           style={btnStyle('next', {})}
           onMouseEnter={() => setHoveredBtn('next')}
           onMouseLeave={() => setHoveredBtn(null)}
-          onClick={onNext}
+          onClick={() => skipTime(5)}
         />
       </div>
     </div>
